@@ -312,6 +312,9 @@ namespace Snake
             SnakeDirection originalSnakeDirection = snakeDirection;
             switch (e.Key)
             {
+                case Key.N:
+                    player.PlayLooping();
+                    break;
                 case Key.Up:
                     if (snakeDirection != SnakeDirection.Down)
                         snakeDirection = SnakeDirection.Up;
