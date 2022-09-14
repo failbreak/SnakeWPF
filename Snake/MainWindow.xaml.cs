@@ -69,7 +69,7 @@ namespace Snake
             InitializeComponent();
             gameTickTimer.Tick += GameTickTimer_Tick;
             LoadHighscoreList();
-            RandomSound();
+            
         }
 
         public void DrawGameArea()
@@ -117,15 +117,17 @@ namespace Snake
         public List<string> GetMSongs()
         {
             
-            for (int i = 1; i < 10; i++)
+            for (int i = 0; i < 2; i++)
             {
-                SoundPath.Add(i + ".wav");
+                SoundPath.Add((i) + ".wav");
             }
             return SoundPath;
         }
         public void RandomSound()
         {
-            //player.SoundLocation = SoundPath[random.Next(0,9)];
+            GetMSongs();
+            player.SoundLocation = SoundPath[random.Next(0, 1)];
+            PlaySound();
         }
 
         public void LoadSound(string path)
@@ -134,7 +136,7 @@ namespace Snake
             player.SoundLocation = path;
             player.Load();
         }
-        public async void PlaySound()
+        public void PlaySound()
         {
             player.Play();
         }
@@ -225,7 +227,7 @@ namespace Snake
             bdrWelcomeMessage.Visibility = Visibility.Collapsed;
             bdrHighscoreList.Visibility = Visibility.Collapsed;
             bdrEndOfGame.Visibility = Visibility.Collapsed;
-            
+            RandomSound();
             foreach (Python snakeBodyPart in snakeParts)
             {
                 if (snakeBodyPart.UiElement != null)
@@ -326,6 +328,25 @@ namespace Snake
                     if (snakeDirection != SnakeDirection.Left)
                         snakeDirection = SnakeDirection.Right;
                     break;
+                case Key.P:
+
+                    //switch (paused)
+                    //{
+                    //    case false:
+                    //        Pause();
+                    //       bool paused = true;
+                    //        break;
+                    //    case true:
+                    //        UnPause();
+                    //        paused = false;
+                    //        break;
+                    //}
+                    Pause();
+
+                    break;
+                case Key.O:
+                    UnPause();
+                    break;
                 case Key.L:
                     snakeLength += 5;
                     break;
@@ -365,7 +386,7 @@ namespace Snake
         }
         private void EatSnakeFood()
         {
-            PlaySound();
+            
             
             snakeLength++;
             currentScore++;
@@ -465,6 +486,9 @@ namespace Snake
             bdrNewHighscore.Visibility = Visibility.Collapsed;
             bdrHighscoreList.Visibility = Visibility.Visible;
         }
+
+        public void Pause() { gameTickTimer.Tick -= GameTickTimer_Tick; }
+        public void UnPause() { gameTickTimer.Tick += GameTickTimer_Tick; }
 
         private void AddLength(object sender, RoutedEventArgs e) => snakeLength += 5;
 
