@@ -38,7 +38,8 @@ ikke ram muren eller dig selv.
 * [v2](https://github.com/failbreak/SnakeWPF/releases/tag/V2)
 
 ## Changelog
-[Github](https://github.com/failbreak/TheBank/commits/Development) - Her er mine commits de beskriver meget af hvad der er sket i det løb af development
+V1: Spillet er spilbart og klar til at blive pushed til master.
+V2: hey music virker og pause virker
 
 #### v1:
 du kan styrer slangen
